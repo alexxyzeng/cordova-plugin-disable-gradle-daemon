@@ -2,17 +2,17 @@
 // Get *Builder.js
 function getBuilderScripts(context) {
   var targetFileArr = [];
-  var deferred = context.requireCordovaModule('q').defer();
-  var path = context.requireCordovaModule('path');
-  var glob = context.requireCordovaModule('glob');
+  var deferred = context.require('q').defer();
+  var path = context.require('path');
+  var glob = context.require('glob');
 
   var builderDir = path.join(context.opts.projectRoot, 'platforms/android/cordova/lib/builders');
 
-  glob(`${builderDir}/*.js`, function(err, files) {
+  glob(`${builderDir}/*.js`, function (err, files) {
     if (err) {
       deferred.reject(err);
     } else {
-      files.forEach(function(file) {
+      files.forEach(function (file) {
         var matches = file.match(/(.*).js/);
         if (matches) {
           targetFileArr.push({
@@ -28,19 +28,19 @@ function getBuilderScripts(context) {
   return deferred.promise;
 }
 
-module.exports = function(context, enable) {
+module.exports = function (context, enable) {
   var fs = require('fs');
-  var deferred = context.requireCordovaModule('q').defer();
+  var deferred = context.require('q').defer();
 
-  getBuilderScripts(context).then(function(targetFiles) {
-    targetFiles.forEach(function(target) {
+  getBuilderScripts(context).then(function (targetFiles) {
+    targetFiles.forEach(function (target) {
       var builder = fs.readFileSync(target.path, 'utf-8');
       var newBuilder = builder.replace(/'(-Dorg\.gradle\.daemon\=)\w+'/, `'$1${enable}'`);
 
       fs.writeFileSync(target.path, newBuilder, 'utf-8');
       deferred.resolve();
     });
-  }).catch(function(err) {
+  }).catch(function (err) {
     deferred.reject(err);
   });
 
