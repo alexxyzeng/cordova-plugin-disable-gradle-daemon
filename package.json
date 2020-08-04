@@ -18,13 +18,13 @@
     "daemon"
   ],
   "dependencies": {
-    "cordova-android": ">=7.0.0"
+    "cordova-android": ">=9.0.0"
   },
   "devDependencies": {},
   "engines": [
     {
       "name": "cordova",
-      "version": ">=6.0.0"
+      "version": ">=9.0.0"
     }
   ],
   "author": "tkikuchi2000 <tkikuchi2000@gmail.com> (https://github.com/tkikuchi2000)",
