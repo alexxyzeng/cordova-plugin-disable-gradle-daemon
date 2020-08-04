@@ -2,9 +2,9 @@
 // Get *Builder.js
 function getBuilderScripts(context) {
   var targetFileArr = [];
-  var deferred = context.require('q').defer();
-  var path = context.require('path');
-  var glob = context.require('glob');
+  var deferred = require('q').defer();
+  var path = context.requireCordovaModule('path');
+  var glob = context.requireCordovaModule('glob');
 
   var builderDir = path.join(context.opts.projectRoot, 'platforms/android/cordova/lib/builders');
 

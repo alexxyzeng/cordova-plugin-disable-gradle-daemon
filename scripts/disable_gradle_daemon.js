@@ -1,9 +1,9 @@
 var android_script = require('./disable_gradle_daemon_android');
 
 module.exports = function (context) {
-  var Q = context.require('q');
-  var platforms = context.require('cordova-lib/src/cordova/util').listPlatforms(context.opts.projectRoot);
-  var ConfigParser = context.require('cordova-common').ConfigParser;
+  var Q = require('q');
+  var platforms = context.requireCordovaModule('cordova-lib/src/cordova/util').listPlatforms(context.opts.projectRoot);
+  var ConfigParser = context.requireCordovaModule('cordova-common').ConfigParser;
   var cfg = new ConfigParser('config.xml');
   var enableDaemon = false;
 
